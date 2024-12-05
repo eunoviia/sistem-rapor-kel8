@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Siswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #00aaff, #d4d4fc);
+        }
+
+        /* Sidebar kiri */
+        .sidebar-left {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-left h2 {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: #ecf0f1;
+            margin-bottom: 20px;
+        }
+
+        .sidebar-left a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-left a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Konten utama */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #ecf0f1;
+            overflow-y: auto;
+            border-radius: 8px;
+            margin: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .main-content h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .main-content p {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #34495e;
+        }
+
+        .main-content p.important {
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Tabel data siswa */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        table th {
+            background-color: #34495e;
+            color: white;
+            font-weight: bold;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #dfe6e9;
+        }
+
+        .subject-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar kiri -->
+<div class="sidebar-left">
+    <h2>Menu</h2>
+    <a href="/dashboard-siswa">Dashboard</a>
+    <a href="/nilai-siswa" style="color: black;">Nilai Siswa</a>
+    <a href="/login-siswa">Log Out</a>
+</div>
+
+<!-- Konten utama -->
+<div class="main-content">
+    <h1>Data Siswa</h1>
+    <p><strong>Nama Siswa:</strong> <span th:text="${siswaName ?: 'Nama tidak tersedia'}">Nama tidak tersedia</span></p>
+
+    <div th:if="${isRaporEmpty == true}">
+        <p class="important">Data siswa masih belum diinput, harap ditunggu.</p>
+    </div>
+
+    <div th:if="${isRaporEmpty == false}">
+        <table>
+            <thead>
+            <tr>
+                <th>Mata Pelajaran</th>
+                <th>Nilai</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td class="subject-name">Fisika</td>
+                <td th:text="${rapor.fisika ?: 'Nilai tidak tersedia'}">Fisika</td>
+            </tr>
+            <tr>
+                <td class="subject-name">Matematika</td>
+                <td th:text="${rapor.matematika ?: 'Nilai tidak tersedia'}">Matematika</td>
+            </tr>
+            <tr>
+                <td class="subject-name">Bahasa Inggris</td>
+                <td th:text="${rapor.bahasaInggris ?: 'Nilai tidak tersedia'}">Bahasa Inggris</td>
+            </tr>
+            <tr>
+                <td class="subject-name">Biologi</td>
+                <td th:text="${rapor.biologi ?: 'Nilai tidak tersedia'}">Biologi</td>
+            </tr>
+            <tr>
+                <td class="subject-name">Kimia</td>
+                <td th:text="${rapor.kimia ?: 'Nilai tidak tersedia'}">Kimia</td>
+            </tr>
+            <tr>
+                <td class="subject-name">Point</td>
+                <td th:text="${rapor.point ?: 'Nilai tidak tersedia'}">Point</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

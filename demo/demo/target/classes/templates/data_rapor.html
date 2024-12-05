@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Rapor</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #00aaff, #d4d4fc); /* Gradasi biru */
+        }
+
+        /* Sidebar kiri */
+        .sidebar-left {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-left h2 {
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .sidebar-left a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-left a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Konten utama */
+        .main-content {
+            flex-grow: 1;
+            padding: 30px;
+            background-color: #ecf0f1;
+            overflow-y: auto;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        /* Tabel data rapor */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            text-align: left;
+            padding: 12px;
+        }
+
+        table th {
+            background-color: #34495e;
+            color: white;
+            font-size: 18px;
+        }
+
+        table td {
+            font-size: 16px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Tombol */
+        button {
+            padding: 10px 20px;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+<!-- Sidebar kiri -->
+<div class="sidebar-left">
+    <h2>Menu</h2>
+    <a href="/dashboard">Dashboard</a>
+    <a href="/data-siswa">Data Siswa</a>
+    <a href="/data-rapor" style="color: black;">Data Rapor</a>
+    <a href="/login/teacher">Log Out</a>
+</div>
+
+<!-- Konten utama -->
+<div class="main-content">
+    <h1>Data Rapor</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Siswa</th>
+            <th>Id</th>
+            <th>Fisika</th>
+            <th>Matematika</th>
+            <th>Bahasa Inggris</th>
+            <th>Biologi</th>
+            <th>Kimia</th>
+            <th>Point</th>
+            <th>Aksi</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterasi raporList menggunakan Thymeleaf -->
+        <tr th:each="rapor, iterStat : ${raporList}">
+            <td th:text="${iterStat.index + 1}">1</td> <!-- Nomor urut -->
+            <td th:text="${rapor.siswa.siswaNama}">Nama Siswa</td>
+            <td th:text="${rapor.raporId}">ID Rapor</td> <!-- ID Rapor -->
+            <td th:text="${rapor.fisika}">Fisika</td>
+            <td th:text="${rapor.matematika}">Matematika</td>
+            <td th:text="${rapor.bahasaInggris}">Bahasa Inggris</td>
+            <td th:text="${rapor.biologi}">Biologi</td>
+            <td th:text="${rapor.kimia}">Kimia</td>
+            <td th:text="${rapor.point}">Point</td>
+            <td>
+                <button th:data-rapor-id="${rapor.raporId}" onclick="deleteRapor(this)">Hapus</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Sistem Manajemen Sekolah</p>
+</div>
+
+<script>
+    function deleteRapor(button) {
+        var raporId = button.getAttribute('data-rapor-id');
+        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+            fetch(`/deleteRapor/${raporId}`, { method: 'DELETE' })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Data berhasil dihapus!');
+                        location.reload();
+                    } else {
+                        alert('Gagal menghapus data!');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    }
+</script>
+
+</body>
+</html>

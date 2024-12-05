@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Nilai</title>
+  <style>
+    /* Styling untuk form */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f9;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2c3e50;
+      margin-top: 20px;
+    }
+
+    form {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 1px solid #bdc3c7;
+      border-radius: 8px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    input,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #bdc3c7;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+
+    button {
+      background-color: #2c3e50;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #34495e;
+    }
+
+    button:active {
+      background-color: #1a252f;
+    }
+
+    @media (max-width: 600px) {
+      form {
+        padding: 15px;
+      }
+
+      input,
+      button {
+        font-size: 14px;
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+<h2>Form Edit Nilai</h2>
+<form id="edit-nilai-form" th:action="@{/edit-nilai/update/{siswaId}(siswaId=${siswa.id})}" method="post">
+  <!-- Form input siswaId yang akan digunakan di controller -->
+  <input type="hidden" name="siswaId" th:value="${siswa.id}" />
+
+  <label for="nama">Nama Siswa:</label>
+  <input type="text" id="nama" name="nama" th:value="${siswa.siswaNama}" readonly />
+
+  <label for="matematika">Nilai Matematika:</label>
+  <input type="number" id="matematika" name="matematika" min="0" max="100" th:value="${rapor.matematika}" required />
+
+  <label for="bahasaInggris">Nilai Bahasa Inggris:</label>
+  <input type="number" id="bahasaInggris" name="bahasaInggris" min="0" max="100" th:value="${rapor.bahasaInggris}" required />
+
+  <label for="fisika">Nilai Fisika:</label>
+  <input type="number" id="fisika" name="fisika" min="0" max="100" th:value="${rapor.fisika}" required />
+
+  <label for="kimia">Nilai Kimia:</label>
+  <input type="number" id="kimia" name="kimia" min="0" max="100" th:value="${rapor.kimia}" required />
+
+  <label for="biologi">Nilai Biologi:</label>
+  <input type="number" id="biologi" name="biologi" min="0" max="100" th:value="${rapor.biologi}" required />
+
+  <button type="submit">Perbarui Nilai</button>
+</form>
+</body>
+</html>

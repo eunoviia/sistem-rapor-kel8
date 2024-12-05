@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Siswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background: linear-gradient(135deg, #00aaff, #d4d4fc); /* Gradasi biru */
+        }
+
+        /* Sidebar kiri */
+        .sidebar-left {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-left h2 {
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #ecf0f1;
+        }
+
+        .sidebar-left a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .sidebar-left a:hover {
+            background-color: #2980b9;
+        }
+
+        /* Sidebar kanan */
+        .sidebar-right {
+            width: 300px;
+            background-color: #ecf0f1;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        .sidebar-right h2 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+    </style>
+</head>
+<body>
+<!-- Sidebar kiri -->
+<div class="sidebar-left">
+    <h2>Menu</h2>
+    <a href="#" style="color: black;">Dashboard</a>
+    <a href="/nilai-siswa">Data Nilai</a>
+    <a href="/login-siswa">Log Out</a>
+</div>
+
+<!-- Sidebar kanan -->
+<div class="sidebar-right">
+    <h2>Data Pribadi Siswa</h2>
+    <div class="info-box">
+        <p><strong>Nama:</strong> <span th:text="${siswaName}">Nama Placeholder</span></p>
+        <p><strong>ID Siswa:</strong> <span th:text="${siswaId}">ID Placeholder</span></p>
+        <p><strong>Email:</strong> <span th:text="${email}">Email Placeholder</span></p>
+        <p><strong>Password:</strong> <span th:text="${password}">Password Placeholder</span></p>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 Sistem Manajemen Sekolah</p>
+</div>
+
+</body>
+</html>

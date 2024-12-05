@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Data Siswa</title>
+  <style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        background: linear-gradient(135deg, #00aaff, #d4d4fc); /* Gradasi biru */
+    }
+
+    /* Sidebar kiri */
+    .sidebar-left {
+        width: 250px;
+        background-color: #34495e;
+        color: white;
+        padding-top: 20px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-left h2 {
+        padding: 15px 20px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #ecf0f1;
+    }
+
+    .sidebar-left a {
+        color: white;
+        text-decoration: none;
+        padding: 15px 20px;
+        display: block;
+        transition: background-color 0.3s ease;
+    }
+
+    .sidebar-left a:hover {
+        background-color: #2980b9;
+    }
+
+    /* Konten utama */
+    .main-content {
+        flex-grow: 1;
+        padding: 30px;
+        background-color: #ecf0f1;
+        overflow-y: auto;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-content h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+
+    /* Tabel data siswa */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        text-align: left;
+        padding: 12px;
+    }
+
+    table th {
+        background-color: #34495e;
+        color: white;
+        font-size: 18px;
+    }
+
+    table td {
+        font-size: 16px;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    table tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Tombol */
+    button {
+        padding: 10px 20px;
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #3498db;
+    }
+
+    /* Footer */
+    .footer {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 14px;
+        color: #7f8c8d;
+    }
+  </style>
+</head>
+<body>
+<!-- Sidebar kiri -->
+<div class="sidebar-left">
+  <h2>Menu</h2>
+  <a href="/dashboard">Dashboard</a>
+  <a href="/data-siswa" style="color: black;">Data Siswa</a>
+  <a href="/data-rapor">Data Rapor</a>
+</div>
+
+<!-- Konten utama -->
+<div class="main-content">
+  <h1>Data Siswa</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>No</th>
+      <th>ID Siswa</th>
+      <th>Nama Siswa</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterasi data siswa dengan Thymeleaf -->
+    <tr th:each="siswa, iterStat : ${students}">
+      <td th:text="${iterStat.index + 1}">1</td>
+      <td th:text="${siswa.id}">ID Siswa</td>
+      <td th:text="${siswa.siswaNama}">Nama Siswa</td>
+      <td th:text="${siswa.email}">Email</td>
+      <td th:text="${siswa.password}">Password</td>
+      <td style="display: flex; flex-direction: column;">
+        <a th:href="@{/form-input-nilai/{id}(id=${siswa.id})}" style="margin-bottom: 10px;">
+          <button>Input Data</button>
+        </a>
+
+        <a th:href="@{/rapor/edit-nilai/{siswaId}(siswaId=${siswa.id})}">
+          <button>Edit Data</button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>&copy; 2024 Sistem Manajemen Sekolah</p>
+</div>
+</body>
+</html>

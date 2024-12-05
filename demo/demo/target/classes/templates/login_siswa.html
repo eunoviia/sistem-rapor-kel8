@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Siswa</title>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login Siswa</h2>
+    <form id="login-form" action="/login-siswa" method="post">
+      <label for="username">Email:</label>
+      <input type="email" id="username" name="username" placeholder="Masukkan email" required />
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Masukkan password" required />
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p class="login-info">
+      <a href="/login/teacher">Login Guru</a>
+    </p>
+  </div>
+</body>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:  #94d9f1; /* Soft light cyan background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .login-container:hover {
+    transform: translateY(-10px);
+  }
+
+  h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #34495e;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #bdc3c7;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+
+  input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+  }
+
+  button {
+    padding: 12px;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  .login-info {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7f8c8d;
+  }
+
+  .login-info a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-info a:hover {
+    text-decoration: underline;
+  }
+</style>
+</html>
